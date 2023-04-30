@@ -15,6 +15,24 @@ OWNER_ID = None
 
 logging.basicConfig(level=logging.INFO)
 
+def check_new_version(current_version: str) -> bool:
+    try:
+        with open("version.py", "r") as version_file:
+            version_content = version_file.read()
+
+        # Extract the version string from version.py content
+        external_version = re.search(r"__version__\s*=\s*['\"]([^'\"]+)['\"]", version_content)
+        if external_version:
+            external_version = external_version.group(1)
+
+            if external_version != current_version:
+                return True
+
+    except Exception as e:
+        print(f"Error checking new version: {e}")
+
+    return False
+
 def read_token():
     if os.path.exists(TOKEN_FILE) and os.path.getsize(TOKEN_FILE) > 0:
         with open(TOKEN_FILE, "r") as token_file:

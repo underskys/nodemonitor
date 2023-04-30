@@ -28,11 +28,10 @@ if [ ! -f "./bot.py" ]; then
     download_files
 fi
 
-if [ ! -f "./version.py" ]; then
-    curl -O https://raw.githubusercontent.com/underskys/nodemonitor/main/version.py
-fi
+curl -O https://raw.githubusercontent.com/underskys/nodemonitor/main/version.py
 
-if python3 -c "import version; from bot import check_new_version; print(check_new_version(version.__version__))" | grep -q "True"; then
+# Check if the downloaded version.py has the same version as in bot.py
+if python -c "import version; from bot import check_new_version; print(check_new_version(version.__version__))" | grep -q "True"; then
     echo "New version is available."
 fi
 
