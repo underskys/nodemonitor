@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /opt/nodemonitor/ 
 
 update_script() {
     echo "Updating start.sh from the repository..."
@@ -20,15 +21,15 @@ if [ "$1" == "update" ]; then
     exit 0
 fi
 
-if [ ! -f "bot.py" ]; then
+if [ ! -f "./bot.py" ]; then
     download_files
 fi
 
-if [ ! -f "version.py" ]; then
+if [ ! -f "./version.py" ]; then
     curl -O https://raw.githubusercontent.com/underskys/nodemonitor/main/version.py
 fi
 
-if python -c "import version; from bot import check_new_version; print(check_new_version(version.__version__))" | grep -q "True"; then
+if /usr/bin/python -c "import version; from bot import check_new_version; print(check_new_version(version.__version__))" | grep -q "True"; then
     echo "New version is available."
 fi
 
