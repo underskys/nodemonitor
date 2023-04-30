@@ -1,5 +1,8 @@
 #!/bin/bash
 cd /opt/nodemonitor/ 
+pip3 install virtualenv
+virtualenv venv
+source venv/bin/activate
 
 update_script() {
     echo "Updating start.sh from the repository..."
@@ -37,4 +40,7 @@ echo "Installing required packages..."
 pip install python-telegram-bot==13.7
 
 echo "Starting bot.py with --init..."
-nohup python bot.py --init &
+nohup python3 bot.py --init &
+
+# Deactivate the virtual environment when done
+deactivate
