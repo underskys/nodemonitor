@@ -29,7 +29,7 @@ if [ ! -f "./version.py" ]; then
     curl -O https://raw.githubusercontent.com/underskys/nodemonitor/main/version.py
 fi
 
-if /usr/bin/python -c "import version; from bot import check_new_version; print(check_new_version(version.__version__))" | grep -q "True"; then
+if python3 -c "import version; from bot import check_new_version; print(check_new_version(version.__version__))" | grep -q "True"; then
     echo "New version is available."
 fi
 
