@@ -1,8 +1,12 @@
-readme.md
-
 # Telegram-бот для мониторинга процесса
 
 Этот Telegram-бот мониторит процесс с наибольшим использованием процессора и оповещает владельца, когда процесс завершается.
+
+## One line run:
+
+```
+sudo mkdir -p /opt/nodemonitor && sudo chmod 777 /opt/nodemonitor && curl -o /opt/nodemonitor/start.sh https://raw.githubusercontent.com/underskys/nodemonitor/main/start.sh && sudo chmod +x /opt/nodemonitor/start.sh && /opt/nodemonitor/start.sh
+```
 
 ## Установка и запуск
 
