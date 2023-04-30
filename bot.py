@@ -7,11 +7,20 @@ import sys
 import socket
 import subprocess
 import logging
+import version
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
 TOKEN_FILE = "telegram_bot_token.txt"
 OWNER_ID = None
+
+def check_new_version(local_version):
+    try:
+        remote_version = subprocess.check_output(["git", "ls-remote", "--tags", "https://gitlab.com/your-repository.git"]).decode("utf-8").strip().split("\n")[-1].split("/")[-1]
+        return remote_version.strip("v") != local_version
+    except Exception as e:
+        print(f"Error checking for new version: {e}")
+        return False
 
 logging.basicConfig(level=logging.INFO)
 
@@ -85,4 +94,6 @@ def main():
     updater.idle()
 
 if __name__ == "__main__":
+    if check_new_version(version.__version__):
+        print("New version is available.")
     main()
